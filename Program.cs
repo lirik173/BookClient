@@ -12,9 +12,10 @@ namespace BookClient
     /// </summary>
     class Program
     {
+        static IDictionary<int, ICommand> commandsDictionary = GetCommandsDictionary(new BookClient("https://localhost:44335/book"));
         static void Main(string[] args)
         {
-            BookClient bookClient = new BookClient("https://localhost:44335/book");
+            
             Console.WriteLine("Hello to library client!");
             while (true)
             {
@@ -26,8 +27,6 @@ namespace BookClient
 
                 int option;
                 int.TryParse(Console.ReadLine(), out option);
-
-                var commandsDictionary = GetCommandsDictionary(bookClient);
                 try
                 {
                     commandsDictionary[option].Execute();
